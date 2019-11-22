@@ -9,7 +9,7 @@ Add the following lines to your `composer.json` file and then run `php composer.
 ```json
 {
     "require": {
-        "templateria/spamassassin": "dev-master"
+        "littlesqx/spamassassin": "dev-master"
     }
 }
 ```

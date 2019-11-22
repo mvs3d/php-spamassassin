@@ -413,9 +413,9 @@ class Client
 
         if ($learnType === self::LEARN_SPAM || $learnType === self::LEARN_HAM) {
             return $result->didSet;
-        } else {
-            return $result->didRemove;
         }
+
+        return $result->didRemove;
     }
 
     /**

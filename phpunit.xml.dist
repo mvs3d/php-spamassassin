@@ -27,7 +27,7 @@
 
     <php>
         <var name="PHPUNIT_SA_HOST" value="127.0.0.1"/>
-        <var name="PHPUNIT_SA_PORT" value="783"/>
+        <var name="PHPUNIT_SA_PORT" value="737"/>
         <var name="PHPUNIT_SA_USER" value="ppadron"/>
         <var name="PHPUNIT_SA_PROTOCOL_VERSION" value="1.5"/>
         <var name="PHPUNIT_SA_LEARN_ENABLED" value="0"/>

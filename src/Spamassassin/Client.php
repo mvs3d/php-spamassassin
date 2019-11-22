@@ -16,14 +16,14 @@ class Client
     const LEARN_HAM    = 1;
     const LEARN_FORGET = 2;
 
-    protected $learnTypes = array(
+    protected $learnTypes = [
         self::LEARN_SPAM,
         self::LEARN_HAM,
-        self::LEARN_FORGET
-    );
+        self::LEARN_FORGET,
+    ];
 
     protected $hostname = 'localhost';
-    protected $port     = '783';
+    protected $port     = '737';
     protected $timeout  = null;
 
     protected $socketPath;
@@ -168,7 +168,7 @@ class Client
 
         fclose($socket);
 
-        return array(trim($headers), trim($message));
+        return [trim($headers), trim($message)];
     }
 
     /**
@@ -279,11 +279,7 @@ class Client
         $this->write($socket, "PING SPAMC/{$this->protocolVersion}\r\n\r\n");
         list($headers, $message) = $this->read($socket);
 
-        if (strpos($headers, "PONG") === false) {
-            return false;
-        }
-
-        return true;
+        return strpos($headers, "PONG") !== false;
     }
 
     /**
@@ -306,7 +302,7 @@ class Client
      *
      * @param string $message Headers for the modified message
      *
-     * @return Result Object containing the
+     * @return string Object containing the
      */
     public function headers($message)
     {
@@ -373,7 +369,7 @@ class Client
         $result = $this->exec('SYMBOLS', $message);
 
         if (empty($result->message)) {
-            return array();
+            return [];
         }
 
         $symbols = explode(",", $result->message);
@@ -398,19 +394,19 @@ class Client
         }
 
         if ($learnType === self::LEARN_SPAM) {
-            $additionalHeaders = array(
+            $additionalHeaders = [
                 'Message-class' => 'spam',
                 'Set' => 'local',
-            );
+            ];
         } elseif ($learnType === self::LEARN_HAM) {
             $additionalHeaders = array(
                 'Message-class' => 'ham',
                 'Set' => 'local',
             );
         } elseif ($learnType === self::LEARN_FORGET) {
-            $additionalHeaders = array(
+            $additionalHeaders = [
                 'Remove' => 'local',
-            );
+            ];
         }
 
         $result = $this->exec('TELL', $message, $additionalHeaders);
@@ -431,10 +427,10 @@ class Client
      */
     public function report($message)
     {
-        $additionalHeaders = array(
+        $additionalHeaders = [
             'Message-class' => 'spam',
             'Set' => 'local,remote',
-        );
+        ];
 
         return $this->exec('TELL', $message, $additionalHeaders)->didSet;
     }
@@ -448,10 +444,10 @@ class Client
      */
     public function revoke($message)
     {
-        $additionalHeaders = array(
+        $additionalHeaders = [
             'Message-class' => 'ham',
             'Set' => 'local,remote',
-        );
+        ];
 
         return $this->exec('TELL', $message, $additionalHeaders)->didSet;
     }

@@ -9,7 +9,7 @@ Add the following lines to your `composer.json` file and then run `php composer.
 ```json
 {
     "require": {
-        "littlesqx/spamassassin": "dev-master"
+        "mvs3d/spamassassin": "dev-master"
     }
 }
 ```
